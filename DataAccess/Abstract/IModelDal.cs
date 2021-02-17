@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Entities.Concrete;
+using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface ICarDal : IEntityRepository<Car>
+    public interface IModelDal : IEntityRepository<Model>
     {
     }
 }

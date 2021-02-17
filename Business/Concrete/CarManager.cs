@@ -16,27 +16,65 @@ namespace Business.Concrete
         }
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (car.CarName.Length>1 && car.DailyPrice>0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Car couldn't added because either car's name wasn't longer than 1 character or daily price wasn't bigger than 0.");
+            }
         }
-        public void Update(int id, Car car)
+        public void Update(Car car)
         {
-            _carDal.Update(id, car);
+            if (car.CarName.Length > 1 && car.DailyPrice > 0)
+            {
+                _carDal.Update(car);
+            }
+            else
+            {
+                Console.WriteLine("Car couldn't updated because either car's name wasn't longer than 1 character or daily price wasn't bigger than 0.");
+            }
         }
 
-        public void Delete(int id)
+        public void Delete(Car car)
         {
-            _carDal.Delete(id);
+            _carDal.Delete(car);
         }
 
-        public List<Car> GetAll()
+        public Car Get(int carId)
+        {
+            return _carDal.Get(c => c.CarId == carId);
+        }
+
+        public List<Car> GetCars()
         {
             return _carDal.GetAll();
         }
 
-        public List<Car> GetById(int id)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetById(id);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
+        }
+
+        public List<Car> GetCarsByModelId(int modelId)
+        {
+            return _carDal.GetAll(c => c.ModelId == modelId);
+        }
+
+        public List<Car> GetCarsByModelYear(DateTime modelYear)
+        {
+            return _carDal.GetAll(c => c.ModelYear == modelYear);
+        }
+
+        public List<Car> GetCarsByDailyPrice(decimal minDailyPrice, decimal maxDailyPrice)
+        {
+            return _carDal.GetAll(c=> c.DailyPrice<=maxDailyPrice && c.DailyPrice>=minDailyPrice);
+        }
     }
 }
