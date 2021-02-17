@@ -11,10 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Busine
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "Console\ConsoleUI.csproj", "{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlQueries", "SqlQueries", "{AE46BC1A-1D9E-45D8-85B5-D0B3BBA9E003}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlQueries", "SqlQueries", "{20FDD6AC-0122-4B90-86C6-41940888AB1B}"
 	ProjectSection(SolutionItems) = preProject
-		AddSomeRowsToTables.sql = AddSomeRowsToTables.sql
-		CreateTables.sql = CreateTables.sql
+		SqlQueries\AddSomeRowsToTables.sql = SqlQueries\AddSomeRowsToTables.sql
+		SqlQueries\CreateTables.sql = SqlQueries\CreateTables.sql
 	EndProjectSection
 EndProject
 Global
