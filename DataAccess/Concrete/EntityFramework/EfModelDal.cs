@@ -3,59 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfModelDal : IModelDal
+    public class EfModelDal : EfEntityRepositoryBase<Model, ReCapProjectDbContext>, IModelDal
     {
-        public void Add(Model entity)
+        public List<ModelDetailDto> GetModelDetails()
         {
             using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Model entity)
-        {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
-            {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public Model Get(Expression<Func<Model, bool>> filter)
-        {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
-            {
-                return context.Set<Model>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Model> GetAll(Expression<Func<Model, bool>> filter = null)
-        {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
-            {
-                return filter == null ?
-                       context.Set<Model>().ToList() :
-                       context.Set<Model>().Where(filter).ToList();
-            }
-        }
-
-        public void Update(Model entity)
-        {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
-            {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                var result = from m in context.Models
+                             join b in context.Brands
+                             on m.BrandId equals b.BrandId
+                             select new ModelDetailDto { 
+                                 BrandId = b.BrandId, 
+                                 BrandName = b.BrandName, 
+                                 ModelId = m.ModelId, 
+                                 ModelName = m.ModelName 
+                             };
+                return result.ToList();
             }
         }
     }

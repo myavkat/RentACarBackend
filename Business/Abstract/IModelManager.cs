@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Entities.Concrete;
 using System.Text;
-using Core.DataAccess;
+using Core.Business;
+using Entities.Concrete;
 using Entities.DTOs;
 
-namespace DataAccess.Abstract
+namespace Business.Abstract
 {
-    public interface IModelDal : IEntityRepository<Model>
+    public interface IModelManager : IEntityManager<Model>
     {
         List<ModelDetailDto> GetModelDetails();
     }

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete
 {
@@ -39,6 +40,11 @@ namespace DataAccess.Concrete
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
         {
             return _cars;
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car entity)

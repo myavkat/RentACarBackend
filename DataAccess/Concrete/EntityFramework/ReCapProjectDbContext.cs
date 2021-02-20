@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    class ReCapProjectDbContext:DbContext
+    public class ReCapProjectDbContext:DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
