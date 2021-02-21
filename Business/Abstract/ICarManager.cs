@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Business;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -10,11 +11,11 @@ namespace Business.Abstract
 {
     public interface ICarManager:IEntityManager<Car>
     {
-        List<Car> GetCarsByBrandId(int brandId);
-        List<Car> GetCarsByColorId(int colorId);
-        List<Car> GetCarsByModelId(int modelId);
-        List<Car> GetCarsByModelYear(DateTime modelYear);
-        List<Car> GetCarsByDailyPrice(decimal minDailyPrice, decimal maxDailyPrice);
-        List<CarDetailDto> GetCarDetails();
+        IDataResult<List<Car>> GetCarsByBrandId(int brandId);
+        IDataResult<List<Car>> GetCarsByColorId(int colorId);
+        IDataResult<List<Car>> GetCarsByModelId(int modelId);
+        IDataResult<List<Car>> GetCarsByModelYear(DateTime modelYear);
+        IDataResult<List<Car>> GetCarsByDailyPrice(decimal minDailyPrice, decimal maxDailyPrice);
+        IDataResult<List<CarDetailDto>> GetCarDetails();
     }
 }

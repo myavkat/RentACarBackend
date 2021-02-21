@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -17,34 +19,37 @@ namespace Business.Concrete
             _modelDal = modelDal;
         }
 
-        public void Add(Model entity)
+        public IResult Add(Model entity)
         {
             _modelDal.Add(entity);
+            return new SuccessResult(Messages.ItemAdded);
         }
 
-        public void Delete(Model entity)
+        public IResult Delete(Model entity)
         {
             _modelDal.Delete(entity);
+            return new SuccessResult(Messages.ItemDeleted);
         }
 
-        public List<Model> GetAll()
+        public IDataResult<List<Model>> GetAll()
         {
-            return _modelDal.GetAll();
+            return new SuccessDataResult<List<Model>>(_modelDal.GetAll(), Messages.ItemsListed);
         }
 
-        public Model GetById(int entityId)
+        public IDataResult<Model> GetById(int entityId)
         {
-            return _modelDal.Get(m=> m.ModelId == entityId);
+            return new SuccessDataResult<Model>(_modelDal.Get(m=> m.ModelId == entityId), Messages.ItemListed);
         }
 
-        public List<ModelDetailDto> GetModelDetails()
+        public IDataResult<List<ModelDetailDto>> GetModelDetails()
         {
-            return _modelDal.GetModelDetails();
+            return new SuccessDataResult<List<ModelDetailDto>>(_modelDal.GetModelDetails(), Messages.FilteredItemsListed);
         }
 
-        public void Update(Model entity)
+        public IResult Update(Model entity)
         {
             _modelDal.Update(entity);
+            return new SuccessResult(Messages.ItemUpdated);
         }
     }
 }
