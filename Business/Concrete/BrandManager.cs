@@ -16,11 +16,13 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
+
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
             return new SuccessResult(Messages.ItemAdded);
         }
+
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
@@ -33,14 +35,14 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ItemUpdated);
         }
 
-        public IDataResult<Brand> GetById(int brandId)
-        {
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId), Messages.ItemListed);
-        }
-
         public IDataResult<List<Brand>> GetAll()
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.ItemsListed);
+        }
+
+        public IDataResult<Brand> GetById(int brandId)
+        {
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId), Messages.ItemListed);
         }
     }
 }

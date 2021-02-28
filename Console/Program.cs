@@ -24,6 +24,17 @@ namespace ConsoleUI
 
             //ModelDtoTest();
 
+            //UserTest();
+
+            ICustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer { CustomerId = 1, UserId = 1, CompanyName = "Holaron Company" });
+
+        }
+
+        private static void UserTest()
+        {
+            IUserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { UserId = 1, FirstName = "James", LastName = "Bonded", Email = "bonded.james@coolmail.com", Password = "iamnotbounded" });
         }
 
         private static void ModelDtoTest()

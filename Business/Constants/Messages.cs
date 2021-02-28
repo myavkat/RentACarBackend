@@ -14,6 +14,7 @@ namespace Business.Constants
         public static string ItemsListed = "All items listed.";
         public static string FilteredItemsListed = "All matching items listed.";
         public static string ItemListed = "Item listed.";
+        public static string NotReturned = "The car has not returned yet.";
 
         //public static string a = "a";
     }

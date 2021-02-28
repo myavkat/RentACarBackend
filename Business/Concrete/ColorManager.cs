@@ -23,6 +23,11 @@ namespace Business.Concrete
             _colorDal.Add(entity);
             return new SuccessResult(Messages.ItemAdded);
         }
+        public IResult Update(Color entity)
+        {
+            _colorDal.Update(entity);
+            return new SuccessResult(Messages.ItemUpdated);
+        }
 
         public IResult Delete(Color entity)
         {
@@ -38,12 +43,6 @@ namespace Business.Concrete
         public IDataResult<Color> GetById(int entityId)
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == entityId), Messages.ItemListed);
-        }
-
-        public IResult Update(Color entity)
-        {
-            _colorDal.Update(entity);
-            return new SuccessResult(Messages.ItemUpdated);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.MinNameLength);
             }
-            else if (car.DailyPrice > 0)
+            else if (car.DailyPrice <= 0)
             {
                 return new ErrorResult(Messages.MinDailyPrice);
             }
