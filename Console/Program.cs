@@ -117,7 +117,7 @@ namespace ConsoleUI
             ICarManager carManager = new CarManager(new EfCarDal());
             foreach (var Car in carManager.GetCarDetails().Data)
             {
-                Console.WriteLine(Car.BrandName + " " + Car.ModelName + " " + Car.ColorName + " " + Car.ModelYear.Year + " " + Car.DailyPrice);
+                Console.WriteLine(Car.BrandName + " " + Car.ModelName + " " + Car.ColorName + " " + Car.ModelYear + " " + Car.DailyPrice);
             }
         }
 
@@ -146,7 +146,7 @@ namespace ConsoleUI
                 Console.WriteLine(car.CarName);
             }
             Console.WriteLine("\nListing 2020 model cars:\n");
-            foreach (var car in carManager.GetCarsByModelYear(new DateTime(2020, 1, 1, 0, 0, 0)).Data)
+            foreach (var car in carManager.GetCarsByModelYear(2020).Data)
             {
                 Console.WriteLine(car.CarName);
             }

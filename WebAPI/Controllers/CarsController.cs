@@ -78,7 +78,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbymodelyear")]
-        public IActionResult GetByModelYear(DateTime modelYear)
+        public IActionResult GetByModelYear(int modelYear)
         {
             var result = _carManager.GetCarsByModelYear(modelYear);
             if (result.Success)
