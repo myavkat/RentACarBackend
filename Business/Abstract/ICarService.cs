@@ -9,7 +9,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface ICarManager:IEntityManager<Car>
+    public interface ICarService:IEntityManager<Car>
     {
         IDataResult<List<Car>> GetCarsByBrandId(int brandId);
         IDataResult<List<Car>> GetCarsByColorId(int colorId);

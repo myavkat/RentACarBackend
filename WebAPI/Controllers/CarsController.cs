@@ -16,16 +16,16 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        ICarManager _carManager;
-        public CarsController(ICarManager carManager)
+        ICarService _carService;
+        public CarsController(ICarService carService)
         {
-            _carManager = carManager;
+            _carService = carService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _carManager.GetAll();
+            var result = _carService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carManager.GetById(id);
+            var result = _carService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -47,7 +47,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbybrandid")]
         public IActionResult GetByBrandId(int id)
         {
-            var result = _carManager.GetCarsByBrandId(id);
+            var result = _carService.GetCarsByBrandId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbycolorid")]
         public IActionResult GetByColorId(int id)
         {
-            var result = _carManager.GetCarsByColorId(id);
+            var result = _carService.GetCarsByColorId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -69,7 +69,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbymodelid")]
         public IActionResult GetByModelId(int id)
         {
-            var result = _carManager.GetCarsByModelId(id);
+            var result = _carService.GetCarsByModelId(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbymodelyear")]
         public IActionResult GetByModelYear(int modelYear)
         {
-            var result = _carManager.GetCarsByModelYear(modelYear);
+            var result = _carService.GetCarsByModelYear(modelYear);
             if (result.Success)
             {
                 return Ok(result);
@@ -91,7 +91,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbydailyprice")]
         public IActionResult GetByDailyPrice(decimal minDailyPrice, decimal maxDailyPrice)
         {
-            var result = _carManager.GetCarsByDailyPrice(minDailyPrice,maxDailyPrice);
+            var result = _carService.GetCarsByDailyPrice(minDailyPrice,maxDailyPrice);
             if (result.Success)
             {
                 return Ok(result);
@@ -102,7 +102,7 @@ namespace WebAPI.Controllers
         [HttpGet("getdetails")]
         public IActionResult GetDetails()
         {
-            var result = _carManager.GetCarDetails();
+            var result = _carService.GetCarDetails();
             if (result.Success)
             {
                 return Ok(result);
@@ -113,7 +113,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Car car)
         {
-            var result = _carManager.Add(car);
+            var result = _carService.Add(car);
             if (result.Success)
             {
                 return Ok(result);
@@ -124,7 +124,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Car car)
         {
-            var result = _carManager.Delete(car);
+            var result = _carService.Delete(car);
             if (result.Success)
             {
                 return Ok(result);
@@ -135,7 +135,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(Car car)
         {
-            var result = _carManager.Update(car);
+            var result = _carService.Update(car);
             if (result.Success)
             {
                 return Ok(result);

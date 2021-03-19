@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class RentalManager:IRentalManager
+    public class RentalManager:IRentalService
     {
         IRentalDal _rentalDal;
 

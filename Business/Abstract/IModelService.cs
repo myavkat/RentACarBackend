@@ -4,10 +4,12 @@ using System.Text;
 using Core.Business;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IRentalManager:IEntityManager<Rental>
+    public interface IModelService : IEntityManager<Model>
     {
+        IDataResult<List<ModelDetailDto>> GetModelDetails();
     }
 }

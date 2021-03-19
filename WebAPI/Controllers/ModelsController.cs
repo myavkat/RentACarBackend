@@ -13,15 +13,15 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ModelsController : ControllerBase
     {
-        IModelManager _modelManager;
-        public ModelsController(IModelManager modelManager)
+        IModelService _modelService;
+        public ModelsController(IModelService modelService)
         {
-            _modelManager = modelManager;
+            _modelService = modelService;
         }
         [HttpPost("add")]
         public IActionResult Add(Model model)
         {
-            var result = _modelManager.Add(model);
+            var result = _modelService.Add(model);
             if (result.Success)
             {
                 return Ok(result);
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         [HttpPost("update")]
         public IActionResult Update(Model model)
         {
-            var result = _modelManager.Update(model);
+            var result = _modelService.Update(model);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         [HttpPost("delete")]
         public IActionResult Delete(Model model)
         {
-            var result = _modelManager.Delete(model);
+            var result = _modelService.Delete(model);
             if (result.Success)
             {
                 return Ok(result);
@@ -54,7 +54,7 @@ namespace WebAPI.Controllers
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _modelManager.GetById(id);
+            var result = _modelService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _modelManager.GetAll();
+            var result = _modelService.GetAll();
             if (result.Success)
             {
                 return Ok(result);

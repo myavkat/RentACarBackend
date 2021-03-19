@@ -6,7 +6,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface ICustomerManager:IEntityManager<Customer>
+    public interface IBrandService:IEntityManager<Brand>
     {
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ConsoleUI
 {
@@ -26,20 +28,24 @@ namespace ConsoleUI
 
             //UserTest();
 
-            ICustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            customerManager.Add(new Customer { CustomerId = 1, UserId = 1, CompanyName = "Holaron Company" });
+            //CustomerTest();
+        }
 
+        private static void CustomerTest()
+        {
+            ICustomerService customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer { CustomerId = 1, UserId = 1, CompanyName = "Holaron Company" });
         }
 
         private static void UserTest()
         {
-            IUserManager userManager = new UserManager(new EfUserDal());
+            IUserService userManager = new UserManager(new EfUserDal());
             userManager.Add(new User { UserId = 1, FirstName = "James", LastName = "Bonded", Email = "bonded.james@coolmail.com", Password = "iamnotbounded" });
         }
 
         private static void ModelDtoTest()
         {
-            IModelManager modelManager = new ModelManager(new EfModelDal());
+            IModelService modelManager = new ModelManager(new EfModelDal());
             foreach (var modelDetail in modelManager.GetModelDetails().Data)
             {
                 Console.WriteLine(modelDetail.ModelName + " " + modelDetail.BrandName);
@@ -48,7 +54,7 @@ namespace ConsoleUI
 
         private static void ModelTest()
         {
-            IModelManager modelManager = new ModelManager(new EfModelDal());
+            IModelService modelManager = new ModelManager(new EfModelDal());
             foreach (var model in modelManager.GetAll().Data)
             {
                 Console.WriteLine(model.ModelName);
@@ -70,7 +76,7 @@ namespace ConsoleUI
 
         private static void ColorTest()
         {
-            IColorManager colorManager = new ColorManager(new EfColorDal());
+            IColorService colorManager = new ColorManager(new EfColorDal());
             foreach (var color in colorManager.GetAll().Data)
             {
                 Console.WriteLine(color.ColorName);
@@ -92,7 +98,7 @@ namespace ConsoleUI
 
         private static void BrandTest()
         {
-            IBrandManager brandManager = new BrandManager(new EfBrandDal());
+            IBrandService brandManager = new BrandManager(new EfBrandDal());
             foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.BrandName);
@@ -114,7 +120,7 @@ namespace ConsoleUI
 
         private static void CarDtoTest()
         {
-            ICarManager carManager = new CarManager(new EfCarDal());
+            ICarService carManager = new CarManager(new EfCarDal());
             foreach (var Car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine(Car.BrandName + " " + Car.ModelName + " " + Car.ColorName + " " + Car.ModelYear + " " + Car.DailyPrice);
@@ -123,7 +129,7 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            ICarManager carManager = new CarManager(new EfCarDal());
+            ICarService carManager = new CarManager(new EfCarDal());
             //carManager.Add(new Car { CarId = 2, BrandId = 5, ModelId = 9, ColorId = 1, CarName = "Ford Fusion 2020 Model", DailyPrice = 550.29, CarDescription = "Too fast. Be cautious!", ModelYear = new DateTime(2020, 1, 1,0,0,0) });
             Console.WriteLine("Listing all cars:\n");
             foreach (var car in carManager.GetAll().Data)

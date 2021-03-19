@@ -14,7 +14,7 @@ using FluentValidation;
 
 namespace Business.Concrete
 {
-    public class CarManager : ICarManager
+    public class CarManager : ICarService
     {
         ICarDal _carDal;
 

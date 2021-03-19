@@ -6,7 +6,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface IUserManager:IEntityManager<User>
+    public interface IColorService : IEntityManager<Color>
     {
     }
 }

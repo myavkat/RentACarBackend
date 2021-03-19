@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class BrandManager:IBrandManager
+    public class BrandManager:IBrandService
     {
         IBrandDal _brandDal;
         public BrandManager(IBrandDal brandDal)
@@ -26,13 +26,13 @@ namespace Business.Concrete
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult(Messages.ItemDeleted);
+            return new SuccessResult(Messages.ItemUpdated);
         }
 
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            return new SuccessResult(Messages.ItemUpdated);
+            return new SuccessResult(Messages.ItemDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()

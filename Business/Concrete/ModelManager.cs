@@ -10,7 +10,7 @@ using Entities.DTOs;
 
 namespace Business.Concrete
 {
-    public class ModelManager : IModelManager
+    public class ModelManager : IModelService
     {
         IModelDal _modelDal;
 

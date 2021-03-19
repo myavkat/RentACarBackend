@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class ColorManager : IColorManager
+    public class ColorManager : IColorService
     {
         IColorDal _colorDal;
 

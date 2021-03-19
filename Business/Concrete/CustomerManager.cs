@@ -9,7 +9,7 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class CustomerManager:ICustomerManager
+    public class CustomerManager:ICustomerService
     {
         ICustomerDal _customerDal;
 
