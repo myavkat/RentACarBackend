@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -30,6 +31,18 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Version = "1.0.0",
+                    Title = "API Swagger",
+                    Description = "Api Swagger Documentation",
+                    TermsOfService = new Uri("http://swagger.io/terms/"),
+                    Contact = new OpenApiContact {
+                        Name = "MyavKat"
+
+                    }
+                });
+            });
 
         }
 
@@ -50,6 +63,11 @@ namespace WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", " API V1");
+                c.RoutePrefix = string.Empty;
             });
         }
     }
