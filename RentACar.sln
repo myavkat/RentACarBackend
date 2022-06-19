@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{5F35D487-881C-4992-A0C0-10E825034C3C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "Console\ConsoleUI.csproj", "{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlQueries", "SqlQueries", "{20FDD6AC-0122-4B90-86C6-41940888AB1B}"
 	ProjectSection(SolutionItems) = preProject
 		SqlQueries\AddSomeRowsToTables.sql = SqlQueries\AddSomeRowsToTables.sql
@@ -39,10 +37,6 @@ Global
 		{5F35D487-881C-4992-A0C0-10E825034C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F35D487-881C-4992-A0C0-10E825034C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F35D487-881C-4992-A0C0-10E825034C3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65759C73-BAB6-4E08-BB7C-CFD6E1BC6A92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A337845C-983B-48F2-9508-C466517E44B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A337845C-983B-48F2-9508-C466517E44B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A337845C-983B-48F2-9508-C466517E44B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
