@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Core.CrossCuttingConcerns.Caching;
 using Core.CrossCuttingConcerns.Caching.Microsoft;
@@ -18,6 +19,9 @@ namespace Core.DependencyResolvers
             //If you change to other cache manager than Microsoft's you can remove the AddMemoryCache() line from here
             serviceCollection.AddMemoryCache();
             serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+
+            //For performance aspect
+            serviceCollection.AddSingleton<Stopwatch>();
         }
     }
 }
