@@ -38,7 +38,7 @@ namespace Business.Concrete
 
         public IDataResult<Model> GetById(int entityId)
         {
-            return new SuccessDataResult<Model>(_modelDal.Get(m=> m.ModelId == entityId), Messages.ItemListed);
+            return new SuccessDataResult<Model>(_modelDal.Get(m=> m.Id == entityId), Messages.ItemListed);
         }
 
         public IDataResult<List<ModelDetailDto>> GetModelDetails()

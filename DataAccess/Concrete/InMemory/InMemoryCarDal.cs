@@ -16,9 +16,9 @@ namespace DataAccess.Concrete
         {
             _cars = new List<Car>
             {
-                new Car{CarId=1, BrandId=1, ColorId=1, ModelYear=2021, DailyPrice=450, CarDescription="Çok Hızlı"},
-                new Car{CarId=2, BrandId=1, ColorId=2, ModelYear=2016, DailyPrice=250, CarDescription="Hızlı"},
-                new Car{CarId=3, BrandId=2, ColorId=1, ModelYear=2008, DailyPrice=100, CarDescription="Normal Hızda"},
+                new Car{Id=1, BrandId=1, ColorId=1, ModelYear=2021, DailyPrice=450, Description="Çok Hızlı"},
+                new Car{Id=2, BrandId=1, ColorId=2, ModelYear=2016, DailyPrice=250, Description="Hızlı"},
+                new Car{Id=3, BrandId=2, ColorId=1, ModelYear=2008, DailyPrice=100, Description="Normal Hızda"},
             };
         }
 

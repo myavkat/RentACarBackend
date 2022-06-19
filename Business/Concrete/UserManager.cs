@@ -43,7 +43,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int entityId)
         {
-            return new SuccessDataResult<User>(_userDal.Get(c => c.UserId == entityId), Messages.ItemListed);
+            return new SuccessDataResult<User>(_userDal.Get(c => c.Id == entityId), Messages.ItemListed);
         }
     }
 }

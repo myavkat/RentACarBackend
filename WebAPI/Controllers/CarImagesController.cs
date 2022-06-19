@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
         {
             if (image.Length > 0)
             {
-                CarImage carImage = new CarImage { CarImageId = carImageId };
+                CarImage carImage = new CarImage { Id = carImageId };
                 if (!DeleteImage(carImage))
                 {
                     return BadRequest("Image couldn't have been deleted.");
@@ -124,7 +124,7 @@ namespace WebAPI.Controllers
 
         private IDataResult<CarImage> getCarImage(CarImage carImage)
         {
-            var result = _carImageService.GetById(carImage.CarImageId);
+            var result = _carImageService.GetById(carImage.Id);
             return result;
         }
 
@@ -149,7 +149,7 @@ namespace WebAPI.Controllers
             if (image.Length > 0)
             {
                 var tempFilePath = Path.GetTempFileName();
-                var filePath = Directory.GetParent(Directory.GetCurrentDirectory()) + @"\CarImages\" + Guid.NewGuid() + Path.GetExtension(image.FileName);
+                var filePath = Directory.GetCurrentDirectory() + @"\wwwroot\" + Guid.NewGuid() + Path.GetExtension(image.FileName);
 
                 using (FileStream tempFileStream = new FileStream(tempFilePath, FileMode.Create))
                     image.CopyTo(tempFileStream);

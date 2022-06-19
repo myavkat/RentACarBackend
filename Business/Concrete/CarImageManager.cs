@@ -53,7 +53,7 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetById(int carImageId)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.CarImageId == carImageId), Messages.ItemListed);
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.Id == carImageId), Messages.ItemListed);
         }
 
         private IResult CheckIfImageCountExceeded(int carId)

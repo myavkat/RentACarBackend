@@ -42,7 +42,7 @@ namespace Business.Concrete
 
         public IDataResult<Color> GetById(int entityId)
         {
-            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == entityId), Messages.ItemListed);
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.Id == entityId), Messages.ItemListed);
         }
     }
 }

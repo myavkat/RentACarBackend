@@ -19,12 +19,12 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from m in context.Models
                              join b in context.Brands
-                             on m.BrandId equals b.BrandId
+                             on m.BrandId equals b.Id
                              select new ModelDetailDto { 
-                                 BrandId = b.BrandId, 
-                                 BrandName = b.BrandName, 
-                                 ModelId = m.ModelId, 
-                                 ModelName = m.ModelName 
+                                 BrandId = b.Id, 
+                                 BrandName = b.Name, 
+                                 ModelId = m.Id, 
+                                 ModelName = m.Name 
                              };
                 return result.ToList();
             }

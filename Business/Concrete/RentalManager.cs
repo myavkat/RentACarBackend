@@ -20,7 +20,7 @@ namespace Business.Concrete
 
         public IResult Add(Rental entity)
         {
-            if (_rentalDal.Get( r => r.RentalId == entity.RentalId).ReturnDate == null)
+            if (_rentalDal.Get( r => r.Id == entity.Id).ReturnDate == null)
             {
                 return new ErrorResult(Messages.NotReturned);
             }
@@ -41,7 +41,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int entityId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.RentalId == entityId), Messages.ItemListed);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.Id == entityId), Messages.ItemListed);
         }
 
         public IResult Update(Rental entity)
