@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Transactions;
 using Castle.DynamicProxy;
@@ -20,7 +21,7 @@ namespace Core.Aspects.Autofac.Transaction
                 }
                 catch (System.Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    Debug.WriteLine("Transaction Scope exception catch: " + e.Message);
                     transactionScope.Dispose();
                     throw;
                 }
