@@ -28,9 +28,9 @@ CREATE TABLE [dbo].[Cars] (
     [Name]        VARCHAR (20)   NULL,
     [Description] VARCHAR (500)  NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC),
-    FOREIGN KEY ([Id]) REFERENCES [dbo].[Brands] ([Id]),
-    FOREIGN KEY ([Id]) REFERENCES [dbo].[Colors] ([Id]),
-    FOREIGN KEY ([Id]) REFERENCES [dbo].[Models] ([Id])
+    FOREIGN KEY ([BrandId]) REFERENCES [dbo].[Brands] ([Id]),
+    FOREIGN KEY ([ColorId]) REFERENCES [dbo].[Colors] ([Id]),
+    FOREIGN KEY ([ModelId]) REFERENCES [dbo].[Models] ([Id])
 );
 
 CREATE TABLE [dbo].[CarImages] (
@@ -43,11 +43,13 @@ CREATE TABLE [dbo].[CarImages] (
 );
 
 CREATE TABLE [dbo].[Users] (
-    [Id]        INT          IDENTITY (1, 1) NOT NULL,
-    [FirstName] VARCHAR (20) NULL,
-    [LastName]  VARCHAR (20) NULL,
-    [Email]     VARCHAR (50) NULL,
-    [Password]  VARCHAR (50) NULL,
+    [Id]           INT             IDENTITY (1, 1) NOT NULL,
+    [FirstName]    VARCHAR (20)    NOT NULL,
+    [LastName]     VARCHAR (20)    NOT NULL,
+    [Email]        VARCHAR (50)    NOT NULL,
+    [PasswordHash] VARBINARY (500) NOT NULL,
+    [PasswordSalt] VARBINARY (500) NOT NULL,
+    [Status] BIT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
@@ -68,4 +70,19 @@ CREATE TABLE [dbo].[Rentals] (
     PRIMARY KEY CLUSTERED ([Id] ASC),
     FOREIGN KEY ([Id]) REFERENCES [dbo].[Customers] ([Id]),
     FOREIGN KEY ([Id]) REFERENCES [dbo].[Cars] ([Id])
+);
+
+CREATE TABLE [dbo].[OperationClaims] (
+    [Id]           INT             IDENTITY (1, 1) NOT NULL,
+    [Name] VARCHAR(50) NOT NULL, 
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[UserOperationClaims] (
+    [Id]               INT IDENTITY (1, 1) NOT NULL,
+    [UserId]           INT NULL,
+    [OperationClaimId] INT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]),
+    FOREIGN KEY ([OperationClaimId]) REFERENCES [dbo].[OperationClaims] ([Id])
 );
