@@ -2,6 +2,7 @@
 using System.IO;
 using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -16,7 +17,7 @@ namespace Business.Concrete
         {
             _carImageDal = carImageDal;
         }
-
+        [TransactionScopeAspect]
         public IResult Add(CarImage carImage)
         {
             var result = BusinessRules.Run(CheckIfImageCountExceeded(carImage.CarId));
