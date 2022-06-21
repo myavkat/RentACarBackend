@@ -53,7 +53,7 @@ namespace Business.Concrete
             {
                 CarImage defaultImage = new CarImage();
                 defaultImage.CarId = 0;
-                defaultImage.ImagePath = Directory.GetCurrentDirectory() + @"\wwwroot\default.png";
+                defaultImage.ImagePath = @"assets\default.png";
                 result.Data.Add(defaultImage);
             }
             return result;
@@ -67,7 +67,7 @@ namespace Business.Concrete
             {
                 CarImage defaultImage = new CarImage();
                 defaultImage.CarId = 0;
-                defaultImage.ImagePath = Directory.GetCurrentDirectory() + @"\wwwroot\default.png";
+                defaultImage.ImagePath = @"assets\default.png";
                 result.Data.Add(defaultImage);
             }
             return result;
