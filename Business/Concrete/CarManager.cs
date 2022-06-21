@@ -42,13 +42,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ItemUpdated);
         }
 
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.ItemDeleted);
         }
 
-        [CacheAspect]
         public IDataResult<Car> GetById(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == carId), Messages.ItemListed);
@@ -60,26 +60,31 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.ItemsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.FilteredItemsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.FilteredItemsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByModelId(int modelId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelId == modelId), Messages.FilteredItemsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByModelYear(int modelYear)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ModelYear == modelYear), Messages.FilteredItemsListed);
         }
 
+        [CacheAspect]
         public IDataResult<List<Car>> GetCarsByDailyPrice(decimal minDailyPrice, decimal maxDailyPrice)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= maxDailyPrice && c.DailyPrice >= minDailyPrice), Messages.FilteredItemsListed);

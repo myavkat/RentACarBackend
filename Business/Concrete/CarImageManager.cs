@@ -2,6 +2,7 @@
 using System.IO;
 using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -17,7 +18,8 @@ namespace Business.Concrete
         {
             _carImageDal = carImageDal;
         }
-        [TransactionScopeAspect]
+
+        [CacheRemoveAspect("ICarImageService.Get")]
         public IResult Add(CarImage carImage)
         {
             var result = BusinessRules.Run(CheckIfImageCountExceeded(carImage.CarId));
@@ -30,12 +32,14 @@ namespace Business.Concrete
             
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         public IResult Update(CarImage carImage)
         {
             _carImageDal.Update(carImage);
             return new SuccessResult(Messages.ItemUpdated);
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         public IResult Delete(CarImage carImage)
         {
             _carImageDal.Delete(carImage);
@@ -44,17 +48,37 @@ namespace Business.Concrete
 
         public IDataResult<List<CarImage>> GetAll()
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.ItemsListed);
+            var result = new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(), Messages.ItemsListed);
+            if (result.Data.Count == 0)
+            {
+                CarImage defaultImage = new CarImage();
+                defaultImage.CarId = 0;
+                defaultImage.ImagePath = Directory.GetCurrentDirectory() + @"\wwwroot\default.png";
+                result.Data.Add(defaultImage);
+            }
+            return result;
         }
 
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetAllByCarId(int carId)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(i=> i.CarId == carId), Messages.ItemsListed);
+            var result = new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(i=> i.CarId == carId), Messages.ItemsListed);
+            if (result.Data.Count == 0)
+            {
+                CarImage defaultImage = new CarImage();
+                defaultImage.CarId = 0;
+                defaultImage.ImagePath = Directory.GetCurrentDirectory() + @"\wwwroot\default.png";
+                result.Data.Add(defaultImage);
+            }
+            return result;
         }
 
-        public IDataResult<CarImage> GetById(int carImageId)
+        public IDataResult<CarImage> GetById(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.Id == carImageId), Messages.ItemListed);
+            var result = new SuccessDataResult<CarImage>(_carImageDal.Get(i => i.Id == id), Messages.ItemListed);
+            if(result.Data == null)
+            return new ErrorDataResult<CarImage>("No such photo");
+            return result;
         }
 
         private IResult CheckIfImageCountExceeded(int carId)

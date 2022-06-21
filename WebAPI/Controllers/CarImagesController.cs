@@ -81,27 +81,19 @@ namespace WebAPI.Controllers
             var result = _carImageService.GetById(carImageId);
             if (result.Success)
             {
-                if (result.Data != null)
-                {
-                    return Ok(OpenFile(result.Data.ImagePath));
-                }
-                return Ok(OpenDefaultImage());
+                return Ok(result);
             }
             return BadRequest(result);
         }
 
         [HttpGet("getallbycarid")]
-        public IActionResult GetAllByCarId([FromForm(Name = "carId")] int carId)
+        public IActionResult GetAllByCarId(int carId)
         {
 
             var result = _carImageService.GetAllByCarId(carId);
-            if (result.Data.Count > 0)
+            if (result.Success)
             {
                 return Ok(result);
-            }
-            else if (result.Data.Count == 0)
-            {
-                return Ok(OpenDefaultImage());
             }
 
             return BadRequest(result);
@@ -114,10 +106,6 @@ namespace WebAPI.Controllers
             if (result.Success)
             {
                 return Ok(result);
-            }
-            else if (result.Data == null)
-            {
-                return Ok(OpenDefaultImage());
             }
             return BadRequest(result);
         }
@@ -149,27 +137,17 @@ namespace WebAPI.Controllers
             if (image.Length > 0)
             {
                 var tempFilePath = Path.GetTempFileName();
-                var filePath = Directory.GetCurrentDirectory() + @"\wwwroot\" + Guid.NewGuid() + Path.GetExtension(image.FileName);
+                var filePath = @"\assets\CarImages\" + Guid.NewGuid() + Path.GetExtension(image.FileName);
+                var fullFilePath = Directory.GetCurrentDirectory() + @"\wwwroot" + filePath;
 
                 using (FileStream tempFileStream = new FileStream(tempFilePath, FileMode.Create))
                     image.CopyTo(tempFileStream);
 
-                System.IO.File.Move(tempFilePath, filePath);
+                System.IO.File.Move(tempFilePath, fullFilePath);
                 carImage.ImagePath = filePath;
                 carImage.Date = DateTime.Now;
             }
 
-        }
-
-        private FileStream OpenFile(string filePath)
-        {
-            return System.IO.File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-        }
-
-        private FileStream OpenDefaultImage()
-        {
-            var defaultFilePath = Directory.GetParent(Directory.GetCurrentDirectory()) + @"\CarImages\default.png";
-            return OpenFile(defaultFilePath);
         }
     }
 }
