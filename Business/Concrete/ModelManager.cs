@@ -41,7 +41,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Model>(_modelDal.Get(m=> m.Id == entityId), Messages.ItemListed);
         }
 
-        public IDataResult<List<ModelDetailDto>> GetModelDetails()
+        public IDataResult<List<ModelDetailDto>> GetAllModelDetails()
         {
             return new SuccessDataResult<List<ModelDetailDto>>(_modelDal.GetModelDetails(), Messages.FilteredItemsListed);
         }
@@ -50,6 +50,10 @@ namespace Business.Concrete
         {
             _modelDal.Update(entity);
             return new SuccessResult(Messages.ItemUpdated);
+        }
+        public IDataResult<List<Model>> GetAllByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<Model>>(_modelDal.GetAll(m => m.BrandId == brandId), Messages.ItemsListed);
         }
     }
 }

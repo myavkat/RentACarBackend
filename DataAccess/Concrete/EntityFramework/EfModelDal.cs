@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfModelDal : EfEntityRepositoryBase<Model, RentACarDbContext>, IModelDal
     {
-        public List<ModelDetailDto> GetModelDetails()
+        public List<ModelDetailDto> GetModelDetails(Expression<Func<ModelDetailDto, bool>> filter = null)
         {
             using (RentACarDbContext context = new RentACarDbContext())
             {
@@ -23,10 +23,12 @@ namespace DataAccess.Concrete.EntityFramework
                              select new ModelDetailDto { 
                                  BrandId = b.Id, 
                                  BrandName = b.Name, 
-                                 ModelId = m.Id, 
-                                 ModelName = m.Name 
+                                 Id = m.Id, 
+                                 Name = m.Name 
                              };
-                return result.ToList();
+                return filter == null ?
+                       result.ToList() :
+                       result.Where(filter).ToList();
             }
         }
     }
