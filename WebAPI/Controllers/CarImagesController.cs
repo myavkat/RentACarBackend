@@ -137,14 +137,20 @@ namespace WebAPI.Controllers
             if (image.Length > 0)
             {
                 var tempFilePath = Path.GetTempFileName();
-                var filePath = @"assets\CarImages\" + Guid.NewGuid() + Path.GetExtension(image.FileName);
-                var fullFilePath = Directory.GetCurrentDirectory() + @"\wwwroot\" + filePath;
+                
+                var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
+                var filePath = Directory.GetCurrentDirectory() + @"/wwwroot/CarImages/";
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                var fullFilePath = filePath + fileName;
 
                 using (FileStream tempFileStream = new FileStream(tempFilePath, FileMode.Create))
                     image.CopyTo(tempFileStream);
 
                 System.IO.File.Move(tempFilePath, fullFilePath);
-                carImage.ImagePath = filePath;
+                carImage.ImagePath = fileName;
                 carImage.Date = DateTime.Now;
             }
 
