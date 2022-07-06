@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"User ID=xnhwrcdmqetigk;Password=5291b6b943e406991479239ff4bba5f6758efb4e72e11947732e4fab75ebf5f5;Server=ec2-3-248-121-12.eu-west-1.compute.amazonaws.com;Port=5432;Database=d3girv9tp2hqks;Integrated Security=true;Pooling=true;SSL Mode=Require;Trust Server Certificate=true;");
+            optionsBuilder.UseNpgsql(@"User ID=ivbotamzxtyxoh;Password=dd210fa01f7dceb35dec02326fab66a85cc840489e389d12a53a6341e8473fb6;Server=ec2-52-49-120-150.eu-west-1.compute.amazonaws.com;Port=5432;Database=d69p33u72q5cjb;Integrated Security=true;Pooling=true;SSL Mode=Require;Trust Server Certificate=true;");
         }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
