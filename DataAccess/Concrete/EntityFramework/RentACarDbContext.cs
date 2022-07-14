@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@"User ID=xnhwrcdmqetigk;Password=5291b6b943e406991479239ff4bba5f6758efb4e72e11947732e4fab75ebf5f5;Server=ec2-3-248-121-12.eu-west-1.compute.amazonaws.com;Port=5432;Database=d3girv9tp2hqks;Integrated Security=true;Pooling=true;SSL Mode=Require;Trust Server Certificate=true;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDb;Database=RentACar;Trusted_Connection=True");
         }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
