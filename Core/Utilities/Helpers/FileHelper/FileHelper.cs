@@ -12,7 +12,7 @@ namespace Core.Utilities.Helpers.FileHelper
         public static string carImages = "CarImages";
         public static IDataResult<string> AddFile(IFormFile file, string subFolderName)
         {
-            if (file.Length <= 0)
+            if (file == null || file.Length <= 0)
             {
                 return new ErrorDataResult<string>("File length less than or equal to zero");
             }
@@ -31,7 +31,12 @@ namespace Core.Utilities.Helpers.FileHelper
         public static IResult DeleteFile(string fileName, string subFolderName)
         {
             var folderPath = GetFolderPath(subFolderName);
-            File.Delete(folderPath + "/" + fileName);
+            var completeFilePath = folderPath + "/" + fileName;
+            if (!File.Exists(completeFilePath))
+            {
+                return new ErrorResult("File does not exist");
+            }
+            File.Delete(completeFilePath);
             return new SuccessResult("File deleted successfully");
         }
         private static string GetFolderPath(string subFolderName)
