@@ -22,57 +22,23 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name = "Image")] IFormFile image, [FromForm(Name = "CarId")] int carId)
         {
-            if (image.Length > 0)
+            var result = _carImageService.Add(image, carId);
+            if (!result.Success)
             {
-                CarImage carImage = new CarImage { CarId = carId };
-                AddImage(image, ref carImage);
-                var result = _carImageService.Add(carImage);
-                if (result.Success)
-                {
-                    return Ok(result);
-                }
-                DeleteImage(carImage);
                 return BadRequest(result);
             }
-            return BadRequest("No image sent.");
-        }
-
-        [HttpPost("update")]
-        public IActionResult Update([FromForm(Name = "Image")] IFormFile image, [FromForm(Name = "CarImageId")] int carImageId)
-        {
-            if (image.Length > 0)
-            {
-                CarImage carImage = new CarImage { Id = carImageId };
-                if (!DeleteImage(carImage))
-                {
-                    return BadRequest("Image couldn't have been deleted.");
-                }
-                AddImage(image, ref carImage);
-                carImage.CarId = getCarImage(carImage).Data.CarId;
-                var result = _carImageService.Update(carImage);
-                if (result.Success)
-                {
-                    return Ok(result);
-                }
-                DeleteImage(carImage);
-                return BadRequest(result);
-            }
-            return BadRequest("No image sent.");
+            return Ok(result);
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(CarImage carImage)
+        public IActionResult Delete(int carImageId)
         {
-            if (!DeleteImage(carImage))
+            var result = _carImageService.Delete(carImageId);
+            if (!result.Success)
             {
-                return BadRequest("Image couldn't have been deleted.");
+                return BadRequest(result);
             }
-            var result = _carImageService.Delete(carImage);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return Ok(result);
         }
 
         [HttpGet("getbyid")]
@@ -108,52 +74,6 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
-        }
-
-        private IDataResult<CarImage> getCarImage(CarImage carImage)
-        {
-            var result = _carImageService.GetById(carImage.Id);
-            return result;
-        }
-
-        private bool DeleteImage(CarImage carImage)
-        {
-            CarImage _carImage = new CarImage();
-            var getCarImageResult = getCarImage(carImage);
-            if (getCarImageResult.Success)
-            {
-                _carImage = getCarImageResult.Data;
-                System.IO.File.Delete(_carImage.ImagePath);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void AddImage(IFormFile image, ref CarImage carImage)
-        {
-            if (image.Length > 0)
-            {
-                var tempFilePath = Path.GetTempFileName();
-                
-                var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
-                var filePath = Directory.GetCurrentDirectory() + @"/wwwroot/CarImages/";
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                }
-                var fullFilePath = filePath + fileName;
-
-                using (FileStream tempFileStream = new FileStream(tempFilePath, FileMode.Create))
-                    image.CopyTo(tempFileStream);
-
-                System.IO.File.Move(tempFilePath, fullFilePath);
-                carImage.ImagePath = fileName;
-                carImage.Date = DateTime.Now;
-            }
-
         }
     }
 }
